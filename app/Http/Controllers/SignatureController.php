@@ -24,8 +24,10 @@ class SignatureController extends Controller
 
 		$image_base64 = base64_decode($image_parts[1]);
 
-		$file = $folderPath . uniqid() . '.' . $image_type;
 		$file_name = uniqid() . '.' . $image_type;
+
+		$file = $folderPath . $file_name;
+
 
 		file_put_contents($file, $image_base64);
 
@@ -36,16 +38,23 @@ class SignatureController extends Controller
 				'employee' => $file_name,
 				'employee_date' => $request->date
 			]);
-		} else {
+		} elseif ($request->role == 'supervisor') {
 			Signature::updateOrCreate([
 				'user_id' => auth()->id()
 			], [
 				'supervisor' => $file_name,
 				'supervisor_date' => $request->date
 			]);
+		} else {
+			Signature::updateOrCreate([
+				'user_id' => auth()->id()
+			], [
+				'hod' => $file_name,
+				'hod_date' => $request->date
+			]);
 		}
 
 		Toastr::success('Signature saved', 'Success', ["positionClass" => "toast-bottom-right"]);
-		return redirect()->route('section.two');
+		return redirect()->back();
 	}
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\SecFive;
 use App\Http\Livewire\SectionThree;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,10 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Section-three', SectionThree::class)->name('section.three');
     Route::get('/Section-four', [\App\Http\Controllers\SectionFourController::class, 'create'])->name('section.four');
     Route::post('/Section-four', [\App\Http\Controllers\SectionFourController::class, 'store'])->name('sectionFour.store');
-    
+    Route::get('/Section-five', SecFive::class)->name('section.five');
+    Route::get('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'create'])->name('section.six');
+    Route::post('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'store'])->name('sectionSix.store');
+    Route::get('/preview', [\App\Http\Controllers\SectionSixController::class, 'final'])->name('final');
 });
 
 Route::get('/', function () {
@@ -39,4 +43,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

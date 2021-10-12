@@ -92,16 +92,45 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="flex float-right form-group">
-                                    @if(!$info->isEmpty())
-                                    <a href="{{route('section.three')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
-                                    @else
+                                @if($info->isEmpty())
+                                <div class="flex justify-end">
                                     <button type="submit" class="text-white bg-green-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow  mr-1 mb-1 hover:bg-blue-500">Save and Continue</button>
-                                    @endif
                                 </div>
+                                @endif
                             </form>
+                            @if(!$signs->isEmpty())
+                            @foreach($signs as $sign)
+                            <div>
+                                <div class="row mt-2 px-2">
+                                    <div class="form-group col-sm-6">
+                                        <p class="font-bold text-green-700 mb-2">Employee Date</p>
+                                        <span>{{$sign->employee_date}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <p class="font-bold text-green-700 mb-2">Employee Signature</p>
+                                        <span><img src="{{ asset('signature/'.$sign->employee) }}" alt="signature" class="w-52"></span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 px-2">
+                                    <div class="form-group col-sm-6">
+                                        <p class="font-bold text-green-700 mb-2">Supervisor Date</p>
+                                        <span>{{$sign->supervisor_date}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <p class="font-bold text-green-700 mb-2">Supervisor Signature</p>
+                                        <span><img src="{{ asset('signature/'.$sign->supervisor) }}" alt="signature" class="w-52"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
                             @if(!$info->isEmpty())
-                              @include('user.sig')
+                             @include('user.sig')
+                            @endif
+                            @if(!$info->isEmpty())
+                            <div class="flex justify-end mt-4">
+                                <a href="{{route('section.three')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
+                            </div>
                             @endif
                         </div>
 

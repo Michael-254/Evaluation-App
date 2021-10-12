@@ -65,6 +65,14 @@ class User extends Authenticatable
         return $this->hasMany(SectionFour::class);
     }
 
+    public function section_five(){
+        return $this->hasMany(SectionFive::class);
+    }
+
+    public function section_six(){
+        return $this->hasMany(SectionSix::class);
+    }
+
     public function sig(){
         return $this->hasMany(Signature::class);
     }

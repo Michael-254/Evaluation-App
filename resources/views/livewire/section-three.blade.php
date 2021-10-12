@@ -219,9 +219,11 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="flex float-right form-group">
+                        @if($trainings->count() > 3)
+                        <div class="flex justify-end form-group">
                             <a href="{{route('section.four')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

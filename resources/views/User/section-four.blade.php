@@ -42,7 +42,7 @@
 
                                 <div class="flex float-right form-group">
                                     @if($info != '')
-                                    <a href="{{route('section.two')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
+                                    <a href="{{route('section.five')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
                                     @else
                                     <button type="submit" class="text-white bg-green-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow  mr-1 mb-1 hover:bg-blue-500">Save and Continue</button>
                                     @endif

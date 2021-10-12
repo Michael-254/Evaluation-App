@@ -150,17 +150,17 @@
                             <i class="fas fa-tools"></i>
                             <span class="text-xs">Section 4</span>
                         </a>
-                        <a href="" class="btn btn-primary col cancel">
+                        <a href="{{route('section.five')}}" class="btn {{Request::segment(2) == 'Section-five' ? 'bg-warning' : 'btn-primary'}} col cancel">
                             <i class="fas fa-toolbox"></i>
                             <span class="text-xs">Section 5</span>
                         </a>
-                        <a href="" class="btn btn-primary col cancel">
+                        <a href="{{route('section.six')}}" class="btn {{Request::segment(2) == 'Section-six' ? 'bg-warning' : 'btn-primary'}} col cancel">
                             <i class="fas fa-tasks"></i>
                             <span class="text-xs">Section 6</span>
                         </a>
-                        <a href="" class="btn btn-primary col cancel">
-                            <i class="fas fa-signature"></i>
-                            <span class="text-xs">Signature</span>
+                        <a href="{{route('final')}}" class="btn {{Request::segment(2) == 'preview' ? 'bg-warning' : 'btn-primary'}} col cancel">
+                            <i class="fas fa-book"></i>
+                            <span class="text-xs">Preview</span>
                         </a>
                     </div>
                     @endif

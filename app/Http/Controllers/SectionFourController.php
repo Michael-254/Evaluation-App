@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\SectionFour;
+use App\Models\SectionThree;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class SectionFourController extends Controller
 {
     public function create(){
+        $progress = SectionThree::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+
+        abort_if($progress == '' ,403,'You must complete the previous section');
         $info = SectionFour::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
         return view('User.section-four', compact('info'));
     }

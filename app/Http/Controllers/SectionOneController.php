@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExtraInformation;
 use App\Models\SectionOne;
 use App\Models\SectionOnePartB;
 use Brian2694\Toastr\Facades\Toastr;
@@ -11,6 +12,9 @@ class SectionOneController extends Controller
 {
     public function create()
     {
+        $progress = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+
+        abort_if($progress == '' ,403,'You must complete the previous section');
         $info = SectionOne::with('partB')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
         return view('User.section-one', compact('info'));
     }
