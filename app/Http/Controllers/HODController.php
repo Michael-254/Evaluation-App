@@ -15,7 +15,7 @@ class HODController extends Controller
 {
     public function IT()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'IT' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'IT')
                     ->whereHas('more_info')
                     ->with(['more_info' => function ($query) {
@@ -27,7 +27,7 @@ class HODController extends Controller
 
     public function ME()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'M&E' || auth()->user()->role_admin,404,'Not Found');
         $data =  User::where('department', '=', 'M&E')
                     ->whereHas('more_info')
                     ->with(['more_info' => function ($query) {
@@ -39,7 +39,7 @@ class HODController extends Controller
 
     public function Communications()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Communications' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'Communications')
                 ->whereHas('more_info')
                 ->with(['more_info' => function ($query) {
@@ -51,7 +51,7 @@ class HODController extends Controller
 
     public function Accounts()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Accounts' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'Accounts')
                     ->whereHas('more_info')
                     ->with(['more_info' => function ($query) {
@@ -63,7 +63,7 @@ class HODController extends Controller
 
     public function Operations()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Operations' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'Operations')
                     ->whereHas('more_info')
                     ->with(['more_info' => function ($query) {
@@ -75,7 +75,7 @@ class HODController extends Controller
 
     public function HR()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Human Resources' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'Human Resources')
                 ->whereHas('more_info')
                 ->with(['more_info' => function ($query) {
@@ -88,7 +88,7 @@ class HODController extends Controller
 
     public function Forestry()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Forestry' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'Forestry')
                 ->whereHas('more_info')
                 ->with(['more_info' => function ($query) {
@@ -100,7 +100,7 @@ class HODController extends Controller
 
     public function MITI()
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Miti Magazine' || auth()->user()->role_admin,404,'Not Found');
         $data = User::where('department', '=', 'Miti Magazine')
                     ->whereHas('more_info')
                     ->with(['more_info' => function ($query) {
@@ -123,7 +123,13 @@ class HODController extends Controller
             'section_six',
         )->find($id);
 
-        return view('hod.report', compact('data'));
+        if($data->department == auth()->user()->department || auth()->user()->role_admin){
+            return view('hod.report', compact('data'));
+        }else{
+            abort(404);
+        }
+
+        
     }
 
     public function comment(Request $request, $id)
