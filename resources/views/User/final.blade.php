@@ -17,10 +17,12 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-12">
+                                                @if(!$data->section_six->isEmpty() && Request::segment(1) == 'user')
                                                 <div class="callout callout-info">
                                                     <h5><i class="fas fa-check-circle fill-current text-green-700"> Congratulations</i></h5>
                                                     You successfully completed the process and below is a preview of data inputed
                                                 </div>
+                                                @endif
 
                                                 <!-- Main content -->
                                                 <div class="invoice p-3 mb-3">
@@ -177,8 +179,8 @@
                                                                             <td class="text-sm">Average</td>
                                                                             <td>
                                                                                 <div class="flex justify-center items-center mt-1 space-x-1 text-sm">
-                                                                                    <span id="avg">0</span>
-                                                                                    <span>/85</span>
+                                                                                    <span id="avg">0</span> /
+                                                                                    <span > {{$data->section_two->count() * 5}}</span>
                                                                                 </div>
                                                                             </td>
                                                                             <td></td>
@@ -188,7 +190,7 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        @include('User.sign-output')
+                                                        @include('User.sig')
                                                     </div>
 
                                                     <div class="border-double border-4 border-light-blue-500 rounded-md mt-2">
@@ -335,7 +337,7 @@
                                                         <div class="mb-2 px-2 pt-2">
                                                             <h6 class=" font-bold text-green-700">Signed as an agreed record:</h6>
                                                         </div>
-                                                           @include('User.sign-output')
+                                                        @include('User.sig')
                                                     </div>
 
                                                     <div class="row  flex justify-end no-print pt-2">

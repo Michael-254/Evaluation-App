@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExtraInformation;
 use App\Models\SectionFive;
 use App\Models\SectionSix;
 use App\Models\Signature;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SectionSixController extends Controller
 {
@@ -18,9 +20,9 @@ class SectionSixController extends Controller
 
         abort_if($progress == '', 403, 'You must complete the previous section');
 
-        $data = Signature::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->get();
+        $personal = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
         $info = SectionSix::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-        return view('User.section-six', compact('info','data'));
+        return view('User.section-six', compact('info', 'personal'));
     }
 
     public function store(Request $request)
@@ -32,6 +34,20 @@ class SectionSixController extends Controller
         ]);
 
         auth()->user()->section_six()->create($validated_data);
+        ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first()
+            ->update(['status' => 'completed']);
+
+        $data = [
+            'intro'  => 'Dear HOD ' . auth()->user()->department . ',',
+            'content'   => auth()->user()->name . ' has completed his performance evaluation and request your review.',
+            'name' => 'HOD ' . auth()->user()->department,
+            'email' => auth()->user()->HOD_email,
+            'subject'  => 'Successful completion of performance evaluation.'
+        ];
+        Mail::send('emails.mail', $data, function ($message) use ($data) {
+            $message->to($data['email'], $data['name'])
+                ->subject($data['subject']);
+        });
 
         Toastr::success('Saved successfully', 'Success', ["positionClass" => "toast-bottom-right"]);
         return redirect()->route('section.six');

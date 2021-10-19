@@ -36,8 +36,4 @@
         </div>
     </div>
     <!-- /.row -->
-
-    </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
 </x-app-layout>

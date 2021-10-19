@@ -39,6 +39,9 @@
     <!-- BS Stepper -->
     <link rel="stylesheet" href="{{asset('assets/plugins/bs-stepper/css/bs-stepper.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/toastr/toastr.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <!-- dropzonejs -->
     <link rel="stylesheet" href="{{asset('assets/plugins/dropzone/min/dropzone.min.css')}}">
     <!-- Theme style -->
@@ -72,20 +75,39 @@
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <a href="{{route('dashboard')}}" class="nav-link text-white">Previous Evalutions</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{route('new.evaluation')}}" class="text-white nav-link">New Evaluation</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-white">Dropdown</a>
-                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">Some action </a></li>
-                                <li><a href="#" class="dropdown-item">Some other action</a></li>
 
+                        @if(auth()->user()->role_HOD)
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-white">HOD Review</a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <li><a href="{{route('hod.it')}}" class="dropdown-item">IT</a></li>
+                                <li><a href="{{route('hod.me')}}" class="dropdown-item">M&E</a></li>
+                                <li><a href="{{route('hod.Forestry')}}" class="dropdown-item">Forestry</a></li>
+                                <li><a href="{{route('hod.Accounts')}}" class="dropdown-item">Accounts</a></li>
+                                <li><a href="{{route('hod.Operations')}}" class="dropdown-item">Operations</a></li>
+                                <li><a href="{{route('hod.MITI')}}" class="dropdown-item">Miti Magazine</a></li>
+                                <li><a href="{{route('hod.Communications')}}" class="dropdown-item">Communications</a></li>
+                                <li><a href="{{route('hod.HR')}}" class="dropdown-item">Human Resources</a></li>
                                 <li class="dropdown-divider"></li>
                             </ul>
                         </li>
+                        @endif
+                        @if(auth()->user()->role_admin)
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-white">HR Role</a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <li><a href="{{route('follow.up')}}" class="dropdown-item">Logs</a></li>
+                                <li><a href="{{route('add.dropdown')}}" class="dropdown-item">Add DropDown Items</a></li>
+                                <li class="dropdown-divider"></li>
+                            </ul>
+                        </li>
+                        @endif
 
                     </ul>
 
@@ -142,7 +164,7 @@
                             <i class="fas fa-user-tag"></i>
                             <span class="text-xs">Section 2</span>
                         </a>
-                        <a href="{{route('section.three')}}" class="btn {{Request::segment(2) == 'Section-three' ? 'bg-warning' : 'btn-primary'}} col cancel">
+                        <a href="#" class="btn {{Request::segment(2) == 'Section-three' ? 'bg-warning' : 'btn-primary'}} col cancel">
                             <i class="fas fa-user-cog"></i>
                             <span class="text-xs">Section 3</span>
                         </a>
@@ -221,6 +243,19 @@
     @stack('scripts')
     @include('layouts.scripts')
     {!! Toastr::message() !!}
+
+    <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 </body>
 
 </html>

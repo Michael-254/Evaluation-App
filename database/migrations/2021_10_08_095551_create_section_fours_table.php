@@ -16,10 +16,10 @@ class CreateSectionFoursTable extends Migration
         Schema::create('section_fours', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('sup_works_well');
-            $table->string('sup_needs_improvement');
-            $table->string('org_works_well');
-            $table->string('org_needs_improvement');
+            $table->text('sup_works_well');
+            $table->text('sup_needs_improvement');
+            $table->text('org_works_well');
+            $table->text('org_needs_improvement');
             $table->timestamps();
         });
     }

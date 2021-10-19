@@ -29,6 +29,24 @@
                                         <textarea name="supervisor_comments" class="summernote">{{$info->supervisor_comments ?? ''}}{{ old('supervisor_comments') }}</textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Employee Signature</p>
+                                        <span>{{auth()->user()->name}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Employee Date</p>
+                                        <span>{{now()->format('d-m-Y')}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Supervisor Signature</p>
+                                        <span>{{$personal->supervisor->name}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Supervisor Date</p>
+                                        <span>{{now()->format('d-m-Y')}}</span>
+                                    </div>
+                                </div>
 
                                 <div class="flex float-right form-group">
                                     @if($info == '')
@@ -36,35 +54,7 @@
                                     @endif
                                 </div>
                             </form>
-                            @if(!$data->isEmpty() && $info != '')
-                            @foreach($data as $sign)
-                            <div>
-                                <div class="row mt-2 px-2">
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Employee Date</p>
-                                        <span>{{$sign->employee_date}}</span>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Employee Signature</p>
-                                        <span><img src="{{ asset('signature/'.$sign->employee) }}" alt="signature" class="w-52"></span>
-                                    </div>
-                                </div>
-                                <div class="row mt-2 px-2">
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Supervisor Date</p>
-                                        <span>{{$sign->supervisor_date}}</span>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Supervisor Signature</p>
-                                        <span><img src="{{ asset('signature/'.$sign->supervisor) }}" alt="signature" class="w-52"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            @endif
-                            @if(!$info == '')
-                            @include('user.sig')
-                            @endif
+                            
                             @if(!$info == '')
                             <div class="flex justify-end mt-4">
                                 <a href="{{route('final')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>

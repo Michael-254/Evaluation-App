@@ -16,10 +16,12 @@ class CreateExtraInformationTable extends Migration
         Schema::create('extra_information', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('status')->default('pending');
             $table->string('Academic');
             $table->string('Designation');
             $table->string('service_years');
             $table->string('review_supervisor');
+            $table->string('review_hod')->nullable();
             $table->string('review_period');
             $table->string('last_appraisal');
             $table->timestamps();

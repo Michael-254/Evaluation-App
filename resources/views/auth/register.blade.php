@@ -26,9 +26,9 @@
                 </div>
 
                 <div class="pt-3">
-                    <x-label for="department" class="mb-1">Department</x-label>
+                    <x-label for="site" class="mb-1">Site</x-label>
 
-                    <select id="department" type="email" class="btn-blue" name="department" required>
+                    <select id="site" class="btn-blue" name="site" required>
                         <option value="">Select Site</option>
                         <option value="Head Office">Head Office</option>
                         <option value="Kiambere">Kiambere</option>
@@ -42,9 +42,19 @@
                 </div>
 
                 <div class="pt-3">
-                    <x-label for="Supervisor_email" class="mb-2">Supervisor Email</x-label>
+                    <x-label for="department" class="mb-1">Department</x-label>
 
-                    <input id="Supervisor_email" type="email" class="btn-blue" name="Supervisor_email" value="{{ old('Supervisor_email') }}" required autocomplete="email" autofocus placeholder="supervisor@email.com" />
+                    <select id="department" class="btn-blue" name="department" required>
+                        <option value="">Select Department</option>
+                        <option value="IT">IT</option>
+                        <option value="M&E">M&E</option>
+                        <option value="Communications">Communications</option>
+                        <option value="Accounts">Accounts</option>
+                        <option value="Operations">Operations</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Forestry">Forestry</option>
+                        <option value="Miti Magazine">Miti Magazine</option>
+                    </select>
                 </div>
 
                 <div class="pt-3">

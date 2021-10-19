@@ -34,10 +34,13 @@
                                                 @if($info->isEmpty())
                                                 @foreach($competences as $competence)
                                                 <tr>
-                                                    <input type="hidden" name="Competence_id[]" value="{{$competence->id}}">
-                                                    <td class="text-sm">{{$competence->competence_skill}}</td>
+                                                    <td class="text-sm">
+                                                        <input type="hidden" name="Competence_id[{{$loop->index}}]" value="no" />
+                                                        <input type="checkbox" name="Competence_id[{{$loop->index}}]" value="{{$competence->id}}" checked class="mr-2" />
+                                                        {{$competence->competence_skill}}
+                                                    </td>
                                                     <td>
-                                                        <select class="btn-blue mike average text-sm" name="Employee_level[]" onchange="update_sumB(),update_avg()" required>
+                                                        <select class="btn-blue mike average text-sm" name="Employee_level[]" onchange="update_sumB(),update_avg()">
                                                             <option value="">Select</option>
                                                             <option value="1">Poor 1</option>
                                                             <option value="2">Improvable 2</option>
@@ -47,7 +50,7 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <select class="btn-blue txt average text-sm" name="Supervisor_level[]" onchange="update_sum(),update_avg()" required>
+                                                        <select class="btn-blue txt average text-sm" name="Supervisor_level[]" onchange="update_sum(),update_avg()">
                                                             <option value="">Select</option>
                                                             <option value="1">Poor 1</option>
                                                             <option value="2">Improvable 2</option>
@@ -57,7 +60,7 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <textarea name="Comments[]" class="btn-blue h-12 text-sm" required placeholder="How will this be achieved">{{ old('Comments')[$loop->index] ?? ''}}</textarea>
+                                                        <textarea name="Comments[]" class="btn-blue h-12 text-sm" placeholder="How will this be achieved">{{ old('Comments')[$loop->index] ?? ''}}</textarea>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -81,8 +84,8 @@
                                                     <td class="text-sm">Average</td>
                                                     <td>
                                                         <div class="flex justify-center items-center mt-1 space-x-1 text-sm">
-                                                            <span id="avg">0</span>
-                                                            <span>/85</span>
+                                                            <span id="avg">0</span> /
+                                                            <span>{{$info->count() * 5}}</span>
                                                         </div>
                                                     </td>
                                                     <td></td>
@@ -92,41 +95,32 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Employee Signature</p>
+                                        <span>{{auth()->user()->name}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Employee Date</p>
+                                        <span>{{now()->format('d-m-Y')}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Supervisor Signature</p>
+                                        <span>{{$personal->supervisor->name}}</span>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <p class="font-sans text-green-700 mb-2">Supervisor Date</p>
+                                        <span>{{now()->format('d-m-Y')}}</span>
+                                    </div>
+                                </div>
                                 @if($info->isEmpty())
-                                <div class="flex justify-end">
+                                <div class="flex justify-end mt-2">
                                     <button type="submit" class="text-white bg-green-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow  mr-1 mb-1 hover:bg-blue-500">Save and Continue</button>
                                 </div>
                                 @endif
                             </form>
-                            @if(!$signs->isEmpty())
-                            @foreach($signs as $sign)
-                            <div>
-                                <div class="row mt-2 px-2">
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Employee Date</p>
-                                        <span>{{$sign->employee_date}}</span>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Employee Signature</p>
-                                        <span><img src="{{ asset('signature/'.$sign->employee) }}" alt="signature" class="w-52"></span>
-                                    </div>
-                                </div>
-                                <div class="row mt-2 px-2">
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Supervisor Date</p>
-                                        <span>{{$sign->supervisor_date}}</span>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <p class="font-bold text-green-700 mb-2">Supervisor Signature</p>
-                                        <span><img src="{{ asset('signature/'.$sign->supervisor) }}" alt="signature" class="w-52"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            @endif
-                            @if(!$info->isEmpty())
-                             @include('user.sig')
-                            @endif
+
+
                             @if(!$info->isEmpty())
                             <div class="flex justify-end mt-4">
                                 <a href="{{route('section.three')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>

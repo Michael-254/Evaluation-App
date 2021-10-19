@@ -11,7 +11,6 @@ class SecFive extends Component
 
     public function save()
     {
-
         $validated_data = $this->validate([
             'proposed_objective' => 'required',
             'department_linked' => 'required',

@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class ExtraInformationController extends Controller
 {
+    public function dashboard()
+    {
+        $extra_info = ExtraInformation::with('supervisor')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->get();
+        return view('dashboard',compact('extra_info'));
+    }
+
     public function index()
     {
         return view('user.non-disclosure');

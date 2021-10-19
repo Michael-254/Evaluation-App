@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\DropDown;
+use App\Http\Livewire\FollowUp;
 use App\Http\Livewire\SecFive;
 use App\Http\Livewire\SectionThree;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 //User
-Route::get('New-Performance-Evaluation', [\App\Http\Controllers\ExtraInformationController::class, 'index'])->name('new.evaluation');
+Route::get('New-Performance-Evaluation', [\App\Http\Controllers\ExtraInformationController::class, 'index'])->middleware('auth')->name('new.evaluation');
+Route::get('/dashboard', [\App\Http\Controllers\ExtraInformationController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
 Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Extra-Information', [\App\Http\Controllers\ExtraInformationController::class, 'moreInfo'])->name('more.information');
@@ -29,18 +32,37 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Section-three', SectionThree::class)->name('section.three');
     Route::get('/Section-four', [\App\Http\Controllers\SectionFourController::class, 'create'])->name('section.four');
     Route::post('/Section-four', [\App\Http\Controllers\SectionFourController::class, 'store'])->name('sectionFour.store');
-    Route::get('/Section-five', SecFive::class)->name('section.five');
+    Route::get('/Section-five', SecFive::class)->middleware('PreventAccess')->name('section.five');
     Route::get('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'create'])->name('section.six');
     Route::post('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'store'])->name('sectionSix.store');
     Route::get('/preview', [\App\Http\Controllers\SectionSixController::class, 'final'])->name('final');
 });
 
+//HOD
+Route::prefix('HOD')->middleware(['auth'])->group(function () {
+    Route::get('/Information-technology', [\App\Http\Controllers\HODController::class, 'IT'])->name('hod.it');
+    Route::get('/Monitoring-evalution', [\App\Http\Controllers\HODController::class, 'ME'])->name('hod.me');
+    Route::get('/Communications', [\App\Http\Controllers\HODController::class, 'Communications'])->name('hod.Communications');
+    Route::get('/Accounts', [\App\Http\Controllers\HODController::class, 'Accounts'])->name('hod.Accounts');
+    Route::get('/Operations', [\App\Http\Controllers\HODController::class, 'Operations'])->name('hod.Operations');
+    Route::get('/Human-Resources', [\App\Http\Controllers\HODController::class, 'HR'])->name('hod.HR');
+    Route::get('/Forestry', [\App\Http\Controllers\HODController::class, 'Forestry'])->name('hod.Forestry');
+    Route::get('/Miti-magazine', [\App\Http\Controllers\HODController::class, 'MITI'])->name('hod.MITI');
+    Route::get('/view-{id}', [\App\Http\Controllers\HODController::class, 'view'])->name('hod.view');
+    Route::patch('/view-{id}', [\App\Http\Controllers\HODController::class, 'comment'])->name('hod.comment');
+    
+});
+
+//follow up
+Route::middleware(['auth'])->group(function () {
+    Route::get('/Follow-up', [\App\Http\Controllers\HODController::class, 'followUp'])->name('follow.up');
+    Route::get('/follow-up/{id}/view', [\App\Http\Controllers\HODController::class, 'report'])->name('followup.view');
+    Route::get('/Add-dropdown', DropDown::class)->name('add.dropdown');
+    
+});
+
 Route::get('/', function () {
     return redirect('/login');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

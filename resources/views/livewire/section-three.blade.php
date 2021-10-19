@@ -39,13 +39,34 @@
                                         <tr>
                                             <form wire:submit.prevent="skill()">
                                                 <td>
-                                                    <textarea wire:model.defer="training_required" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="training_required" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'Skill')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="how_achieved" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="how_achieved" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'achieved')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="person_responsible" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="person_responsible" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'responsible')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
                                                     <button type="submit" class="btn btn-app bg-info"><i class="fas fa-save"></i> Save</button>
@@ -90,13 +111,34 @@
                                         <tr>
                                             <form wire:submit.prevent="experience()">
                                                 <td>
-                                                    <textarea wire:model.defer="training_required" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="training_required" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'Experience')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="how_achieved" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="how_achieved" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'achieved')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="person_responsible" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="person_responsible" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'responsible')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
                                                     <button type="submit" class="btn btn-app bg-primary"><i class="fas fa-save"></i> Save</button>
@@ -141,13 +183,34 @@
                                         <tr>
                                             <form wire:submit.prevent="Knowledge()">
                                                 <td>
-                                                    <textarea wire:model.defer="training_required" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="training_required" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'Knowledge')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="how_achieved" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="how_achieved" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'achieved')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="person_responsible" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="person_responsible" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'responsible')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
                                                     <button type="submit" class="btn btn-app bg-warning"><i class="fas fa-save"></i> Save</button>
@@ -192,13 +255,34 @@
                                         <tr>
                                             <form wire:submit.prevent="Other()">
                                                 <td>
-                                                    <textarea wire:model.defer="training_required" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="training_required" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'Other')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="how_achieved" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="how_achieved" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'achieved')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <textarea wire:model.defer="person_responsible" class="btn-blue"></textarea>
+                                                    <select wire:model.defer="person_responsible" class="btn-blue">
+                                                        <option value="">-- Select --</option>
+                                                        @foreach($dropdowns as $dropdown)
+                                                        @if($dropdown->type == 'responsible')
+                                                        <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
                                                     <button type="submit" class="btn btn-app bg-success"><i class="fas fa-save"></i> Save</button>

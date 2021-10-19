@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DropData;
 use App\Models\SectionThree as ModelsSectionThree;
 use Livewire\Component;
 
@@ -89,7 +90,8 @@ class SectionThree extends Component
     public function render()
     {
         return view('livewire.section-three', [
-            'trainings' => ModelsSectionThree::where('user_id', auth()->id())->get()
+            'trainings' => ModelsSectionThree::where('user_id', auth()->id())->get(),
+            'dropdowns' => DropData::all()
         ]);
     }
 }
