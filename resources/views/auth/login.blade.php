@@ -3,7 +3,7 @@
         <div class="w-96 bg-gray-100 rounded-lg shadow-xl p-6">
 
             <div class="flex justify-center">
-                <img src="assets/images/logo.png" alt="" class="w-16 h-16">
+                <img src="{{asset('assets/dist/img/logo.png')}}" alt="" class="w-16 h-16">
             </div>
 
             <h1 class="text-green-800 text-3xl pt-5">Welcome Back</h1>

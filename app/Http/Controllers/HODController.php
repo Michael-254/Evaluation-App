@@ -162,12 +162,12 @@ class HODController extends Controller
         $timestamp = uniqid().$comment->user_id;
         Storage::put('public/pdf/'.$timestamp.'/evaluation.pdf', $pdf->output());
 
-        $link = '127.0.0.1:8000/storage/pdf/'.$timestamp.'/evaluation.pdf';
+        $password = $timestamp;
 
         $info = [
             'intro'  => 'Dear ' . $data['name'] . ',',
             'content'   => 'Your performance evauation has been reviewed by the HOD and given his remarks',
-            'link' => $link,
+            'password' => $password,
             'name' => $data['name'],
             'email' => $data['email'],
             'subject'  => 'Successful completion of HOD review on your performance evaluation.'
@@ -200,6 +200,6 @@ class HODController extends Controller
             'section_six',
             'sig'
         )->find($id);
-        return view('User.final', compact('data'));
+        return view('hod.print', compact('data'));
     }
 }

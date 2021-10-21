@@ -42,4 +42,11 @@ class ExtraInformationController extends Controller
         Toastr::success('Saved successfully', 'Success', ["positionClass" => "toast-bottom-right"]);
         return redirect('/user/Extra-Information');
     }
+
+    public function file(Request $request)
+    {
+        $timestamp = $request->password;
+        $path = storage_path('app/public/pdf/'.$timestamp.'/evaluation.pdf', );
+        return response()->file($path);
+    }
 }

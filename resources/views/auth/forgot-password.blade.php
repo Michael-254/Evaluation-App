@@ -3,7 +3,7 @@
         <div class="w-96 p-6 rounded-lg bg-gray-100 shadow-xl">
 
             <div class="flex justify-center">
-                <img src="assets/images/logo.png" alt="" class="w-16 h-16">
+                <img src="{{asset('assets/dist/img/logo.png')}}" alt="" class="w-16 h-16">
             </div>
 
             <h1 class="text-green-800 text-3xl pt-4">Oh no!</h1>

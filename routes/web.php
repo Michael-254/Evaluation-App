@@ -36,6 +36,7 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'create'])->name('section.six');
     Route::post('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'store'])->name('sectionSix.store');
     Route::get('/preview', [\App\Http\Controllers\SectionSixController::class, 'final'])->name('final');
+    Route::post('/my-evaluation-report', [\App\Http\Controllers\ExtraInformationController::class, 'file'])->name('file.view');
 });
 
 //HOD
@@ -63,6 +64,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/', function () {
     return redirect('/login');
+});
+
+Route::get('/view-evaluation-pdf', function () {
+    return view('User.doc-access');
 });
 
 require __DIR__ . '/auth.php';

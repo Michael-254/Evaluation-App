@@ -10,7 +10,8 @@
 
 	<div>
 		{!! '<p>'.$content.'</p>' !!}
-		<p><a href="https://{!!$link!!}" style="color:#0000FF">Click me to view it</a></p>
+		<p><a href="https://evaluation.betterglobeforestry.co.ke/view-evaluation-pdf" style="color:#0000FF">Click me to view it</a></p>
+		<p>Password: {!! $password !!}</a></p>
 		<small class="text-sm" style="color:#808080">
 			Thanks,<br>
 			HR Team<br>
