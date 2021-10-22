@@ -51,7 +51,9 @@
                                         <select class="btn-blue" name="review_supervisor" required>
                                             <option disabled="disabled" selected="selected">-- Choose your supervisor --</option>
                                             @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @if($user->department == auth()->user()->department)
+                                            <option value="{{$user->id}}">{{$user->job_title}}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                         @endif

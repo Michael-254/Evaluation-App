@@ -371,14 +371,14 @@
                         <tr>
                             <td class="text-sm">{{App\Models\Competence::find($section_two['Competence_id'])->competence_skill}}</td>
                             <td><span>{{$section_two['Employee_level']}}</span></td>
-                            <td><span>{{$section_two['Supervisor_level']}}</span></td>                       
-                            <td><span>{{$section_two['Comments']}}</span></td>                           
+                            <td><span>{{$section_two['Supervisor_level']}}</span></td>
+                            <td><span>{{$section_two['Comments']}}</span></td>
                         </tr>
                         @endforeach
-                      @php 
-                       $employee = array_sum(\Arr::pluck($data['section_two'],'Employee_level')); 
-                       $supervisor = array_sum(\Arr::pluck($data['section_two'],'Supervisor_level')); 
-                         @endphp
+                        @php
+                        $employee = array_sum(\Arr::pluck($data['section_two'],'Employee_level'));
+                        $supervisor = array_sum(\Arr::pluck($data['section_two'],'Supervisor_level'));
+                        @endphp
                         <tr>
                             <td class="text-sm">Total</td>
                             <td><span class="flex justify-center items-center mt-1">{{$employee}}</span></td>
@@ -496,7 +496,9 @@
             <div class="row mt-1">
                 <table style="width: 100%;">
                     <tr>
-                        <td><h3 class="text-dark mb-1">Section Four: Support Mechanisms</h3></td>
+                        <td>
+                            <h3 class="text-dark mb-1">Section Four: Support Mechanisms</h3>
+                        </td>
                     </tr>
                     @foreach($data['section_four'] as $section_four)
                     <tr>
@@ -540,11 +542,13 @@
                 <h3 class="text-dark mb-1">Section Five: Personal Objective </h3>
                 <table class="table invoice-detail-table">
                     <thead>
-                        <th>Proposed Personal Objective</th>
-                        <th>Departmental/Strategic Business Objective it is linked to</th>
-                        <th>How will achievement of this objective be measured</th>
-                        <th>What steps will be taken to achieve this</th>
-                        <th>Completion date</th>
+                        <tr>
+                            <th>Proposed Personal Objective</th>
+                            <th>Departmental/Strategic linked to</th>
+                            <th>How achievement measured</th>
+                            <th>Steps to achieve this</th>
+                            <th>Completion date</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($data['section_five'] as $objective)
@@ -564,10 +568,14 @@
             <div class="row mt-1">
                 <table style="width: 100%;">
                     <tr>
-                        <td><h3 class="text-dark mb-1">Section Six: Overall Comments</h3></td>
+                        <td>
+                            <h3 class="text-dark mb-1">Section Six: Overall Comments</h3>
+                        </td>
                     </tr>
                     <tr>
-                        <td><h5 class="text-dark mb-1">Based on discussions on the five sections above</h5></td>
+                        <td>
+                            <h5 class="text-dark mb-1">Based on discussions on the five sections above</h5>
+                        </td>
                     </tr>
                     @foreach($data['section_six'] as $section_six)
                     <tr>
@@ -602,7 +610,9 @@
             <div class="row mt-1">
                 <table style="width: 100%;">
                     <tr>
-                        <td><h3 class="text-dark mb-1">Signed as an agreed record</h3></td>
+                        <td>
+                            <h3 class="text-dark mb-1">Signed as an agreed record</h3>
+                        </td>
                     </tr>
                     <tr>
                         <td>

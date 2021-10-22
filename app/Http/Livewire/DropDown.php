@@ -4,9 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\DropData;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DropDown extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $type, $dropdown_item;
 
     public function save()

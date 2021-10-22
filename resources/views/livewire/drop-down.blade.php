@@ -54,6 +54,10 @@
 
                                 </div>
                                 @endforeach
+
+                                <div class="pt-4 flex justify-end">
+                                    {{$dropdowns->links()}}
+                                </div>
                             </div>
                         </div>
 

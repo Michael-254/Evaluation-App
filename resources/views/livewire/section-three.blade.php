@@ -114,7 +114,7 @@
                                                     <select wire:model.defer="training_required" class="btn-blue">
                                                         <option value="">-- Select --</option>
                                                         @foreach($dropdowns as $dropdown)
-                                                        @if($dropdown->type == 'Experience')
+                                                        @if($dropdown->type == 'Skill')
                                                         <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
                                                         @endif
                                                         @endforeach
@@ -186,7 +186,7 @@
                                                     <select wire:model.defer="training_required" class="btn-blue">
                                                         <option value="">-- Select --</option>
                                                         @foreach($dropdowns as $dropdown)
-                                                        @if($dropdown->type == 'Knowledge')
+                                                        @if($dropdown->type == 'Skill')
                                                         <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
                                                         @endif
                                                         @endforeach
@@ -258,7 +258,7 @@
                                                     <select wire:model.defer="training_required" class="btn-blue">
                                                         <option value="">-- Select --</option>
                                                         @foreach($dropdowns as $dropdown)
-                                                        @if($dropdown->type == 'Other')
+                                                        @if($dropdown->type == 'Skill')
                                                         <option value="{{$dropdown->dropdown_item}}">{{$dropdown->dropdown_item}}</option>
                                                         @endif
                                                         @endforeach

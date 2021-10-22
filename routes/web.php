@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //User
 Route::get('New-Performance-Evaluation', [\App\Http\Controllers\ExtraInformationController::class, 'index'])->middleware('auth')->name('new.evaluation');
 Route::get('/dashboard', [\App\Http\Controllers\ExtraInformationController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::post('/my-evaluation-report', [\App\Http\Controllers\ExtraInformationController::class, 'file'])->name('file.view');
 
 Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Extra-Information', [\App\Http\Controllers\ExtraInformationController::class, 'moreInfo'])->name('more.information');
@@ -36,7 +37,7 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'create'])->name('section.six');
     Route::post('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'store'])->name('sectionSix.store');
     Route::get('/preview', [\App\Http\Controllers\SectionSixController::class, 'final'])->name('final');
-    Route::post('/my-evaluation-report', [\App\Http\Controllers\ExtraInformationController::class, 'file'])->name('file.view');
+    
 });
 
 //HOD

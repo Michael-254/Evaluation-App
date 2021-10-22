@@ -23,6 +23,7 @@ class User extends Authenticatable
         'department',
         'site',
         'HOD_email',
+        'job_title',
         'password',
     ];
 

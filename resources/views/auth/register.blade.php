@@ -16,7 +16,13 @@
                 <div>
                     <x-label for="name" class="mb-2" :value="__('Name')" />
 
-                    <input id="name" class="btn-blue" type="text" name="name" :value="old('name')" required autofocus />
+                    <input id="name" class="btn-blue" type="text" name="name" value="{{ old('name') }}" required autofocus />
+                </div>
+
+                <div class="pt-3">
+                    <x-label for="job title" class="mb-2" :value="__('Job title')" />
+
+                    <input id="job title" class="btn-blue" type="text" name="job_title" value="{{ old('job_title') }}" required autofocus />
                 </div>
 
                 <div class="pt-3">

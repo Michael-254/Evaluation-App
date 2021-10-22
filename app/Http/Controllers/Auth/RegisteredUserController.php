@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'job_title' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'department' => ['required'],
             'site' => ['required'],
@@ -46,6 +47,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'department' => $request->department,
+            'job_title' => $request->job_title,
             'site' => $request->site,
             'HOD_email' => $request->HOD_email,
             'password' => Hash::make($request->password),
