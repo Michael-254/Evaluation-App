@@ -30,12 +30,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-6">
-                                        <p class="font-sans text-green-700 mb-2">Academic/Professional qualifications</p>
-                                        <textarea name="Academic" class="btn-blue" placeholder="Academic/Professional qualifications">{{$info->Academic ?? ''}}</textarea>
+                                        <p class="font-sans text-green-700 mb-2">Current Designation</p>
+                                        <span>{{auth()->user()->job_title}}</span>
+                                        <input type="hidden" name="Designation" class="btn-blue" value="{{auth()->user()->job_title}}">
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <p class="font-sans text-green-700 mb-2">Current Designation</p>
-                                        <input type="text" name="Designation" class="btn-blue" value="{{$info->Designation ?? ''}}" placeholder="Designation">
+                                        <p class="font-sans text-green-700 mb-2">Academic/Professional qualifications</p>
+                                        <textarea name="Academic" class="btn-blue" placeholder="Academic/Professional qualifications">{{$info->Academic ?? ''}}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
@@ -51,7 +52,8 @@
                                         <select class="btn-blue" name="review_supervisor" required>
                                             <option disabled="disabled" selected="selected">-- Choose your supervisor --</option>
                                             @foreach($users as $user)
-                                            @if($user->department == auth()->user()->department)
+                                            @if($user->department == auth()->user()->department && $user->site == auth()->user()->site
+                                            || $user->department == auth()->user()->department && $user->site == "Head Office" || $user->role_admin)
                                             <option value="{{$user->id}}">{{$user->job_title}}</option>
                                             @endif
                                             @endforeach
@@ -78,8 +80,6 @@
                                 </div>
                             </form>
                         </div>
-
-
                     </div>
                 </div>
             </div>

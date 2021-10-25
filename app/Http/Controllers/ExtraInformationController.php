@@ -23,7 +23,7 @@ class ExtraInformationController extends Controller
     public function moreInfo()
     {
         $info = ExtraInformation::with('supervisor')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-        $users = User::select('id', 'name','job_title','department')->get();
+        $users = User::all();
         return view('user.personal-info', compact(['users', 'info']));
     }
 
