@@ -49,7 +49,7 @@ class FollowUp extends LivewireDatatable
             Column::name('section_six.hod_comments')->label('HOD Comments')->filterable(),
             Column::callback(['id'], function ($id) {
                 return view('livewire.follow-up', ['id' => $id]);
-            })
+            })->label('Action')
         ];
     }
 
