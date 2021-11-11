@@ -37,7 +37,7 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'create'])->name('section.six');
     Route::post('/Section-six', [\App\Http\Controllers\SectionSixController::class, 'store'])->name('sectionSix.store');
     Route::get('/preview', [\App\Http\Controllers\SectionSixController::class, 'final'])->name('final');
-    
+    Route::get('/print-my-results', [\App\Http\Controllers\SectionSixController::class, 'printResults'])->name('final.results');
 });
 
 //HOD
@@ -52,7 +52,6 @@ Route::prefix('HOD')->middleware(['auth'])->group(function () {
     Route::get('/Miti-magazine', [\App\Http\Controllers\HODController::class, 'MITI'])->name('hod.MITI');
     Route::get('/view-{id}', [\App\Http\Controllers\HODController::class, 'view'])->name('hod.view');
     Route::patch('/view-{id}', [\App\Http\Controllers\HODController::class, 'comment'])->name('hod.comment');
-    
 });
 
 //follow up
@@ -60,7 +59,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Follow-up', [\App\Http\Controllers\HODController::class, 'followUp'])->name('follow.up');
     Route::get('/follow-up/{id}/view', [\App\Http\Controllers\HODController::class, 'report'])->name('followup.view');
     Route::get('/Add-dropdown', DropDown::class)->name('add.dropdown');
-    
 });
 
 Route::get('/', function () {

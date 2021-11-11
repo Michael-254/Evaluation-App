@@ -11,6 +11,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class SectionSixController extends Controller
 {
@@ -55,6 +56,7 @@ class SectionSixController extends Controller
 
     public function final()
     {
+        $info = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
         $data = User::with(
             'more_info',
             'section_one',
@@ -65,6 +67,24 @@ class SectionSixController extends Controller
             'section_six',
             'sig'
         )->find(auth()->id());
-        return view('User.final', compact('data'));
+        return view('User.final', compact('data', 'info'));
+    }
+
+    public function printResults()
+    {
+        $data = User::with(
+            'more_info',
+            'section_one',
+            'section_two',
+            'section_three',
+            'section_four',
+            'section_five',
+            'section_six',
+            'sig'
+        )->find(auth()->id())->toArray();
+        view()->share('data', $data);
+
+        $pdf = PDF::loadView('User.document', ['data' => $data]);
+        return $pdf->download(auth()->user()->name . '.pdf');
     }
 }

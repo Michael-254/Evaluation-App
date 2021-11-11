@@ -91,7 +91,7 @@ class SectionThree extends Component
     {
         return view('livewire.section-three', [
             'trainings' => ModelsSectionThree::where('user_id', auth()->id())->get(),
-            'dropdowns' => DropData::all()
+            'dropdowns' => DropData::orderBy('dropdown_item', 'asc')->get()
         ]);
     }
 }

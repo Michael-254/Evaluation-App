@@ -180,7 +180,7 @@
                                                                             <td>
                                                                                 <div class="flex justify-center items-center mt-1 space-x-1 text-sm">
                                                                                     <span id="avg">0</span> /
-                                                                                    <span > {{$data->section_two->count() * 5}}</span>
+                                                                                    <span> {{$data->section_two->count() * 5}}</span>
                                                                                 </div>
                                                                             </td>
                                                                             <td></td>
@@ -340,9 +340,11 @@
                                                         @include('User.sig')
                                                     </div>
 
+                                                    @if($info->status == 'HOD reviewed')
                                                     <div class="row  flex justify-end no-print pt-2">
-                                                        <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                                        <a href="{{route('final.results')}}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                                                     </div>
+                                                    @endif
                                                 </div>
                                                 <!-- /.invoice -->
                                             </div><!-- /.col -->
