@@ -58,6 +58,7 @@ Route::prefix('HOD')->middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/Follow-up', [\App\Http\Controllers\HODController::class, 'followUp'])->name('follow.up');
     Route::get('/follow-up/{id}/view', [\App\Http\Controllers\HODController::class, 'report'])->name('followup.view');
+    Route::get('/filing/{id}', [\App\Http\Controllers\HODController::class, 'filing'])->name('filing');
     Route::get('/Add-dropdown', DropDown::class)->name('add.dropdown');
 });
 

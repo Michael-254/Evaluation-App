@@ -400,6 +400,10 @@
 
                                                     </div>
 
+                                                    <div class="row  flex justify-end no-print pt-2">
+                                                        <a href="{{route('filing',$data->id)}}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                                    </div>
+
                                                 </div>
                                                 <!-- /.invoice -->
                                             </div><!-- /.col -->

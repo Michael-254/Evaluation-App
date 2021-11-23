@@ -15,104 +15,104 @@ class HODController extends Controller
 {
     public function IT()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'IT' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'IT' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'IT')
-                    ->whereHas('more_info')
-                    ->with(['more_info' => function ($query) {
-                        $query->where('status', '=', 'completed');
-                    }])
-                        ->get();
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function ME()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'M&E' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'M&E' || auth()->user()->role_admin, 404, 'Not Found');
         $data =  User::where('department', '=', 'M&E')
-                    ->whereHas('more_info')
-                    ->with(['more_info' => function ($query) {
-                        $query->where('status', '=', 'completed');
-                    }])
-                        ->get();
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function Communications()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Communications' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Communications' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'Communications')
-                ->whereHas('more_info')
-                ->with(['more_info' => function ($query) {
-                    $query->where('status', '=', 'completed');
-                }])
-                    ->get();
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function Accounts()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Accounts' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Accounts' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'Accounts')
-                    ->whereHas('more_info')
-                    ->with(['more_info' => function ($query) {
-                        $query->where('status', '=', 'completed');
-                    }])
-                        ->get();
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function Operations()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Operations' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Operations' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'Operations')
-                    ->whereHas('more_info')
-                    ->with(['more_info' => function ($query) {
-                        $query->where('status', '=', 'completed');
-                    }])
-                        ->get(); 
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function HR()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Human Resources' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Human Resources' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'Human Resources')
-                ->whereHas('more_info')
-                ->with(['more_info' => function ($query) {
-                    $query->where('status', '=', 'completed');
-                }])
-                ->get();           
-                        
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
+
         return view('hod.table', compact('data'));
     }
 
     public function Forestry()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Forestry' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Forestry' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'Forestry')
-                ->whereHas('more_info')
-                ->with(['more_info' => function ($query) {
-                    $query->where('status', '=', 'completed');
-                }])
-                    ->get();
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function MITI()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Miti Magazine' || auth()->user()->role_admin,404,'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Miti Magazine' || auth()->user()->role_admin, 404, 'Not Found');
         $data = User::where('department', '=', 'Miti Magazine')
-                    ->whereHas('more_info')
-                    ->with(['more_info' => function ($query) {
-                        $query->where('status', '=', 'completed');
-                    }])
-                        ->get(); 
+            ->whereHas('more_info')
+            ->with(['more_info' => function ($query) {
+                $query->where('status', '=', 'completed');
+            }])
+            ->get();
         return view('hod.table', compact('data'));
     }
 
     public function view($id)
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_if(!auth()->user()->role_HOD, 404, 'Not Found');
         $data = User::with(
             'more_info',
             'section_one',
@@ -123,18 +123,16 @@ class HODController extends Controller
             'section_six',
         )->find($id);
 
-        if($data->department == auth()->user()->department || auth()->user()->role_admin){
+        if ($data->department == auth()->user()->department || auth()->user()->role_admin) {
             return view('hod.report', compact('data'));
-        }else{
+        } else {
             abort(404);
         }
-
-        
     }
 
     public function comment(Request $request, $id)
     {
-        abort_if(!auth()->user()->role_HOD,404,'Not Found');
+        abort_if(!auth()->user()->role_HOD, 404, 'Not Found');
         $request->validate([
             'hod_comments' => 'required',
         ]);
@@ -155,12 +153,12 @@ class HODController extends Controller
             'section_four',
             'section_five',
             'section_six',
-        )->find($comment->user_id)->toArray(); 
-        view()->share('data',$data);   
- 
+        )->find($comment->user_id)->toArray();
+        view()->share('data', $data);
+
         $pdf = PDF::loadView('User.document', ['data' => $data]);
-        $timestamp = uniqid().$comment->user_id;
-        Storage::put('public/pdf/'.$timestamp.'/evaluation.pdf', $pdf->output());
+        $timestamp = uniqid() . $comment->user_id;
+        Storage::put('public/pdf/' . $timestamp . '/evaluation.pdf', $pdf->output());
 
         $password = $timestamp;
 
@@ -183,13 +181,13 @@ class HODController extends Controller
 
     public function followUp()
     {
-        abort_if(!auth()->user()->role_admin,404,'Not Found');
+        abort_if(!auth()->user()->role_admin, 404, 'Not Found');
         return view('hod.follow-up');
     }
 
     public function report($id)
     {
-        abort_if(!auth()->user()->role_admin,404,'Not Found');
+        abort_if(!auth()->user()->role_admin, 404, 'Not Found');
         $data = User::with(
             'more_info',
             'section_one',
@@ -201,5 +199,24 @@ class HODController extends Controller
             'sig'
         )->find($id);
         return view('hod.print', compact('data'));
+    }
+
+    public function filing($id)
+    {
+        abort_if(!auth()->user()->role_admin, 404, 'Not Found');
+        $data = User::with(
+            'more_info',
+            'section_one',
+            'section_two',
+            'section_three',
+            'section_four',
+            'section_five',
+            'section_six',
+            'sig'
+        )->find($id)->toArray();
+        view()->share('data', $data);
+
+        $pdf = PDF::loadView('User.document', ['data' => $data]);
+        return $pdf->download('Evaluation.pdf');
     }
 }
