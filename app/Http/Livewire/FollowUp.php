@@ -24,6 +24,7 @@ class FollowUp extends LivewireDatatable
     public function builder()
     {
         return User::query()
+         ->whereHas('section_one')
          ->with(
             'more_info',
             'section_one',
