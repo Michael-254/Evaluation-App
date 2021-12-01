@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(SectionOne::class);
     }
 
+    // public function items()
+    // {
+    //     return $this->hasManyThrough(SectionOnePartB::class, SectionOne::class);
+    // }
+
     public function section_two(){
         return $this->hasMany(SectionTwo::class);
     }

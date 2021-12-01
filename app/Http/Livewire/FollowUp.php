@@ -3,6 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Audits;
+use App\Models\SectionOne;
+use App\Models\SectionOnePartB;
+use App\Models\SectionThree;
+use App\Models\SectionTwo;
 use App\Models\User;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
@@ -23,6 +27,7 @@ class FollowUp extends LivewireDatatable
          ->with(
             'more_info',
             'section_one',
+            'items',
             'section_two',
             'section_three',
             'section_four',
@@ -40,6 +45,24 @@ class FollowUp extends LivewireDatatable
             Column::name('site')->label('Site')->filterable($this->site),
             Column::name('more_info.status')->label('Status')->filterable(),
             Column::name('more_info.Designation')->label('Designation')->filterable(),
+            Column::callback(['id','name'], function ($id) {
+                $secOne_id = SectionOne::where('user_id',$id)->first()->id;
+                $objectives = SectionOnePartB::where('section_one_id',$secOne_id)->select('id','Objective','status',
+                     'E_comments','S_comments')->get();
+                     return   $objectives;
+            })->label('Objective and Comments'),         
+            Column::name('section_two.Employee_level:sum')->label('Employee Marks'),
+            Column::name('section_two.Supervisor_level:sum')->label('Supervisor Marks'),
+            Column::name('section_two.Supervisor_level:count')->label('Marks Out of'),
+            // Column::callback(['id','trainings'], function ($id) {
+            //     $objectives = SectionThree::where('user_id',$id)->select('id','Objective','status',
+            //          'E_comments','S_comments')->get();
+            //          return   $objectives;
+            // })->label('Training and Development'),
+            Column::name('section_three.topic')->label('Type'),
+            Column::name('section_three.training_required')->label('Training and Development'),
+            Column::name('section_three.how_achieved')->label('How will it be achieved'),
+            Column::name('section_three.person_responsible')->label('Person Responsible'),
             Column::name('section_four.sup_works_well')->label('Sup works Well')->filterable(),
             Column::name('section_four.sup_needs_improvement')->label('Sup need improvement')->filterable(),
             Column::name('section_four.org_works_well')->label('Org works Well')->filterable(),
