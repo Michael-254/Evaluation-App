@@ -49,4 +49,20 @@ class ExtraInformationController extends Controller
         $path = storage_path('app/public/pdf/'.$timestamp.'/evaluation.pdf', );
         return response()->file($path);
     }
+
+    public function excel(){
+        $users = User::whereHas('section_one')
+         ->with(
+            'more_info',
+            'section_one',
+            'items',
+            'section_two',
+            'section_three',
+            'section_four',
+            'section_five',
+            'section_six',
+        )->get();
+
+        return view('hod.excel',compact('users'));
+    }
 }
