@@ -16,7 +16,7 @@ class SectionOneController extends Controller
 
         abort_if($progress == '', 403, 'You must complete the previous section');
         $info = $progress->load('sectionOne.partB');
-        return view('User.section-one', compact('info'));
+        return view('user.section-one', compact('info'));
     }
 
     public function store(Request $request)

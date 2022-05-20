@@ -16,7 +16,7 @@ class SectionFourController extends Controller
 
         abort_if($progress->sectionThree->count() < 3 && $progress->evaluation_type == 'yearly', 403, 'You must complete the previous section');
         $info = $progress->load('SectionFour');
-        return view('User.section-four', compact('info'));
+        return view('user.section-four', compact('info'));
     }
 
     public function store(Request $request)

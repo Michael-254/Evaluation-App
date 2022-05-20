@@ -102,7 +102,7 @@
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-white">HR Role</a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a href="{{route('follow.up')}}" class="dropdown-item">Logs</a></li>
+                                <li><a href="{{route('excel.expo')}}" class="dropdown-item">Logs</a></li>
                                 <li><a href="{{route('add.dropdown')}}" class="dropdown-item">Add DropDown Items</a></li>
                                 <li class="dropdown-divider"></li>
                             </ul>

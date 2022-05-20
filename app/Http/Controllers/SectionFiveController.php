@@ -14,6 +14,6 @@ class SectionFiveController extends Controller
 
       abort_if($progress == '', 403, 'You must complete the previous section');
       $info = SectionFive::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-      return view('User.section-five', compact('info'));
+      return view('user.section-five', compact('info'));
    }
 }

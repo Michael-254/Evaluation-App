@@ -21,7 +21,7 @@ class SectionSixController extends Controller
 
         abort_if($progress->sectionFive->count() < 2 && $progress->evaluation_type == 'yearly', 403, 'You must complete the previous section');
         $info = $progress->load('SectionSix');
-        return view('User.section-six', compact('info'));
+        return view('user.section-six', compact('info'));
     }
 
     public function store(Request $request)

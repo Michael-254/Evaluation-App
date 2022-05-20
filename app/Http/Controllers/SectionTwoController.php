@@ -19,7 +19,7 @@ class SectionTwoController extends Controller
         abort_if($progress->sectionOne->q_oneA == '' && $progress->evaluation_type == 'yearly', 403, 'You must complete the previous section');
         $competences = DB::table('competences')->select('id', 'competence_skill')->get();
         $info = $progress->load('SectionTwo');
-        return view('User.section-two', compact('info', 'competences'));
+        return view('user.section-two', compact('info', 'competences'));
     }
 
     public function store(Request $request)

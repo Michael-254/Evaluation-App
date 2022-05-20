@@ -182,7 +182,7 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        @include('User.sig')
+                                                        @include('user.sig')
                                                     </div>
 
                                                     @if($data->evaluation_type == 'yearly')
@@ -334,7 +334,7 @@
                                                             <h6 class=" font-bold text-green-700">Signed as an agreed record:</h6>
                                                         </div>
 
-                                                        @include('User.sig')
+                                                        @include('user.sig')
 
                                                     </div>
 
