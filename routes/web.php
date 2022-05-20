@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('New-Performance-Evaluation', [\App\Http\Controllers\ExtraInformationController::class, 'index'])->middleware('auth')->name('new.evaluation');
 Route::get('/dashboard', [\App\Http\Controllers\ExtraInformationController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::post('/my-evaluation-report', [\App\Http\Controllers\ExtraInformationController::class, 'file'])->name('file.view');
+Route::get('/previous-evaluation/{id}', [\App\Http\Controllers\ExtraInformationController::class, 'previousEvaluation'])->name('prev.eval');
 
 Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/Extra-Information', [\App\Http\Controllers\ExtraInformationController::class, 'moreInfo'])->name('more.information');

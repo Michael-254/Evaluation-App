@@ -23,19 +23,19 @@
                                     <div class="form-group w-full">
                                         <p class="font-sans font-bold text-green-700 mb-2">1. What is your major role in your position to achieve the company objective</p>
                                         <p class="font-sans text-green-700 mb-2">(a) Briefly list the main responsibilities and duties of your current job</p>
-                                        <textarea name="q_oneA" class="summernote bg-green-500">{{$info->q_oneA ?? ''}}{{ old('q_oneA') }}</textarea>
+                                        <textarea name="q_oneA" class="summernote bg-green-500">{{$info->sectionOne->q_oneA ?? ''}}{{ old('q_oneA') }}</textarea>
                                     </div>
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">(b) Special tasks (if any)</p>
-                                        <textarea name="q_oneB" class="summernote">{{$info->q_oneB ?? ''}}{{ old('q_oneB') }}</textarea>
+                                        <textarea name="q_oneB" class="summernote">{{$info->sectionOne->q_oneB ?? ''}}{{ old('q_oneB') }}</textarea>
                                     </div>
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">(c) How do you relate to the vision and mission of the company?</p>
-                                        <textarea name="q_oneC" class="summernote">{{$info->q_oneC ?? ''}}{{ old('q_oneC') }}</textarea>
+                                        <textarea name="q_oneC" class="summernote">{{$info->sectionOne->q_oneC ?? ''}}{{ old('q_oneC') }}</textarea>
                                     </div>
                                 </div>
 
-                                @if($info != '')
+                                @if($info->sectionOne->q_oneA != '')
                                 <div class="table-responsive">
                                     <table class="table invoice-detail-table">
                                         <thead>
@@ -47,7 +47,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($info->partB as $objective)
+                                            @foreach($info->sectionOne->partB as $objective)
                                             <tr>
                                                 <td>{{$objective->Objective}}</td>
                                                 <td>{{$objective->status}}</td>
@@ -91,23 +91,24 @@
                                 <div class="row">
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">3.What achievements are you most proud of this year?</p>
-                                        <textarea name="q_three" class="summernote bg-green-500">{{$info->q_three ?? ''}}{{ old('q_three') }}</textarea>
+                                        <textarea name="q_three" class="summernote bg-green-500">{{$info->sectionOne->q_three ?? ''}}{{ old('q_three') }}</textarea>
                                     </div>
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">4.What factors in your considered opinion would contribute to improved performance in your current and future assignments?</p>
-                                        <textarea name="q_four" class="summernote">{{$info->q_four ?? ''}}{{ old('q_four') }}</textarea>
+                                        <textarea name="q_four" class="summernote">{{$info->sectionOne->q_four ?? ''}}{{ old('q_four') }}</textarea>
                                     </div>
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">5.What major problems did you encounter in your job? Give reasons.</p>
-                                        <textarea name="q_five" class="summernote">{{$info->q_five ?? ''}}{{ old('q_five') }}</textarea>
+                                        <textarea name="q_five" class="summernote">{{$info->sectionOne->q_five ?? ''}}{{ old('q_five') }}</textarea>
                                     </div>
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">6.What other additional suggestions do you offer which may help to improve your work performance and efficiency?</p>
-                                        <textarea name="q_six" class="summernote">{{$info->q_six ?? ''}}{{ old('q_six') }}</textarea>
+                                        <textarea name="q_six" class="summernote">{{$info->sectionOne->q_six ?? ''}}{{ old('q_six') }}</textarea>
                                     </div>
                                 </div>
+
                                 <div class="flex float-right form-group">
-                                    @if($info != '')
+                                    @if($info->sectionOne->q_oneA != '')
                                     <a href="{{route('section.two')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
                                     @else
                                     <button type="submit" class="text-white bg-green-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow  mr-1 mb-1 hover:bg-blue-500">Save and Continue</button>

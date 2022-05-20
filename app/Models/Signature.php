@@ -11,6 +11,7 @@ class Signature extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'employee',
         'supervisor',
         'hod',

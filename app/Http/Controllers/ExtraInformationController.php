@@ -11,8 +11,8 @@ class ExtraInformationController extends Controller
 {
     public function dashboard()
     {
-        $extra_info = ExtraInformation::with('supervisor')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->get();
-        return view('dashboard',compact('extra_info'));
+        $extra_info = ExtraInformation::with('supervisor')->where('user_id', auth()->id())->get();
+        return view('dashboard', compact('extra_info'));
     }
 
     public function index()
@@ -22,7 +22,7 @@ class ExtraInformationController extends Controller
 
     public function moreInfo()
     {
-        $info = ExtraInformation::with('supervisor')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+        $info = ExtraInformation::with('supervisor')->where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
         $users = User::all();
         return view('user.personal-info', compact(['users', 'info']));
     }
@@ -30,6 +30,7 @@ class ExtraInformationController extends Controller
     public function store(Request $request)
     {
         $validatedData =  $request->validate([
+            'evaluation_type' => 'required',
             'Academic' => 'required',
             'Designation' => 'required',
             'service_years' => 'required',
@@ -46,23 +47,32 @@ class ExtraInformationController extends Controller
     public function file(Request $request)
     {
         $timestamp = $request->password;
-        $path = storage_path('app/public/pdf/'.$timestamp.'/evaluation.pdf', );
+        $path = storage_path('app/public/pdf/' . $timestamp . '/evaluation.pdf',);
         return response()->file($path);
     }
 
-    public function excel(){
+    public function excel()
+    {
         $users = User::whereHas('section_one')
-         ->with(
-            'more_info',
-            'section_one',
-            'items',
-            'section_two',
-            'section_three',
-            'section_four',
-            'section_five',
-            'section_six',
-        )->get();
+            ->with(
+                'more_info',
+                'section_one',
+                'items',
+                'section_two',
+                'section_three',
+                'section_four',
+                'section_five',
+                'section_six',
+            )->get();
 
-        return view('hod.excel',compact('users'));
+        return view('hod.excel', compact('users'));
+    }
+
+    public function previousEvaluation($id)
+    {
+        $data = ExtraInformation::findOrFail($id)
+            ->load('supervisor', 'sectionOne.partB', 'sectionTwo', 'sectionThree', 'sectionFour', 'sectionFive', 'sectionSix');
+
+        return view('User/previous-evaluation', compact('data'));
     }
 }

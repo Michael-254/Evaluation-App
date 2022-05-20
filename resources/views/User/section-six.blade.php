@@ -22,11 +22,11 @@
                                     <div class="form-group w-full">
                                         <p class="font-sans font-bold text-green-700 mb-2">Based on discussions on the five sections above</p>
                                         <p class="font-sans text-green-700 mb-2">Employee: Comments</p>
-                                        <textarea name="employee_comments" class="summernote bg-green-500">{{$info->employee_comments ?? ''}}{{ old('employee_comments') }}</textarea>
+                                        <textarea name="employee_comments" class="summernote bg-green-500">{{$info->sectionSix->employee_comments ?? ''}}{{ old('employee_comments') }}</textarea>
                                     </div>
                                     <div class="form-group w-full">
                                         <p class="font-sans text-green-700 mb-2">Supervisor: Comments</p>
-                                        <textarea name="supervisor_comments" class="summernote">{{$info->supervisor_comments ?? ''}}{{ old('supervisor_comments') }}</textarea>
+                                        <textarea name="supervisor_comments" class="summernote">{{$info->sectionSix->supervisor_comments ?? ''}}{{ old('supervisor_comments') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <p class="font-sans text-green-700 mb-2">Supervisor Signature</p>
-                                        <span>{{$personal->supervisor->name}}</span>
+                                        <span>{{$info->supervisor->name}}</span>
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <p class="font-sans text-green-700 mb-2">Supervisor Date</p>
@@ -49,13 +49,13 @@
                                 </div>
 
                                 <div class="flex float-right form-group">
-                                    @if($info == '')
+                                    @if($info->sectionSix->employee_comments == '')
                                     <button type="submit" class="text-white bg-green-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow  mr-1 mb-1 hover:bg-blue-500">Save and Continue</button>
                                     @endif
                                 </div>
                             </form>
                             
-                            @if(!$info == '')
+                            @if($info->sectionSix->employee_comments != '')
                             <div class="flex justify-end mt-4">
                                 <a href="{{route('final')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
                             </div>

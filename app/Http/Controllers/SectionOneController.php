@@ -12,10 +12,10 @@ class SectionOneController extends Controller
 {
     public function create()
     {
-        $progress = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+        $progress = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
 
-        abort_if($progress == '' ,403,'You must complete the previous section');
-        $info = SectionOne::with('partB')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+        abort_if($progress == '', 403, 'You must complete the previous section');
+        $info = $progress->load('sectionOne.partB');
         return view('User.section-one', compact('info'));
     }
 
@@ -32,6 +32,8 @@ class SectionOneController extends Controller
             'q_six' => 'required',
         ]);
 
+        $info = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
+        $Validated_data["extra_info"] = $info->id;
         $data = auth()->user()->section_one()->create($Validated_data);
 
         foreach ($request->Objective as $key => $Objective) {

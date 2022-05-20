@@ -11,6 +11,7 @@ class SectionFour extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'sup_works_well',
         'sup_needs_improvement',
         'org_works_well',

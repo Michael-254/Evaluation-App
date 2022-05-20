@@ -11,6 +11,7 @@ class SectionOne extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'q_oneA',
         'q_oneB',
         'q_oneC',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ExtraInformation;
 use App\Models\SectionFive;
 use Livewire\Component;
 
@@ -19,6 +20,9 @@ class SecFive extends Component
             'completion_date' => 'required',
         ]);
 
+        $info = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
+        $validated_data["extra_info"] = $info->id;
+
         auth()->user()->section_five()->create($validated_data);
 
         $this->reset();
@@ -32,7 +36,7 @@ class SecFive extends Component
     public function render()
     {
         return view('livewire.sec-five',[
-            'objectives' => SectionFive::where('user_id', auth()->id())->get()
+            'objectives' => ExtraInformation::with('sectionFive')->where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first()
         ]);
     }
 }

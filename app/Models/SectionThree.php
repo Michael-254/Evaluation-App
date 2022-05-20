@@ -11,6 +11,7 @@ class SectionThree extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'topic',
         'training_required',
         'how_achieved',

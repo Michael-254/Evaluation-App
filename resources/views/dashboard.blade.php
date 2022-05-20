@@ -30,7 +30,7 @@
                                         <td>{{$info->status}}</td>
                                         <td>{{$info->supervisor->name}}</td>
                                         <td>{{$info->review_period}}</td>
-                                        <td><a href="{{route('more.information')}}"><i class="fas fa-eye text-green-600 hover:text-green-800"></i></a></td>
+                                        <td><a href="{{route('prev.eval',$info->id)}}"><i class="fas fa-eye text-green-600 hover:text-green-800"></i></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

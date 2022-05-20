@@ -16,6 +16,7 @@ class CreateSectionFivesTable extends Migration
         Schema::create('section_fives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->string('proposed_objective');
             $table->string('department_linked');
             $table->string('objective_measurement');

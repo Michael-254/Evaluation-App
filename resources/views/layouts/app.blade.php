@@ -79,7 +79,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('new.evaluation')}}" class="text-white nav-link">New Evaluation</a>
+                            <a href="{{route('new.evaluation')}}" class="nav-link text-white">New Evalution</a>
                         </li>
 
                         @if(auth()->user()->role_HOD)

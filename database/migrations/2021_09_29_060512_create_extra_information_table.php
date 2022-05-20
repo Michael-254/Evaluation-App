@@ -17,6 +17,7 @@ class CreateExtraInformationTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('status')->default('pending');
+            $table->string('evaluation_type')->nullable();
             $table->string('Academic');
             $table->string('Designation');
             $table->string('service_years');

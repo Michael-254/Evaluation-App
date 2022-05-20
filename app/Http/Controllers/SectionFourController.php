@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExtraInformation;
 use App\Models\SectionFour;
 use App\Models\SectionThree;
 use Brian2694\Toastr\Facades\Toastr;
@@ -9,11 +10,12 @@ use Illuminate\Http\Request;
 
 class SectionFourController extends Controller
 {
-    public function create(){
-        $progress = SectionThree::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+    public function create()
+    {
+        $progress = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
 
-        abort_if($progress == '' ,403,'You must complete the previous section');
-        $info = SectionFour::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+        abort_if($progress->sectionThree->count() < 3 && $progress->evaluation_type == 'yearly', 403, 'You must complete the previous section');
+        $info = $progress->load('SectionFour');
         return view('User.section-four', compact('info'));
     }
 
@@ -26,6 +28,9 @@ class SectionFourController extends Controller
             'org_works_well' => 'required',
             'org_needs_improvement' => 'required',
         ]);
+
+        $info = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
+        $Validated_data["extra_info"] = $info->id;
 
         $data = auth()->user()->section_four()->create($Validated_data);
 

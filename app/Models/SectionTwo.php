@@ -11,6 +11,7 @@ class SectionTwo extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'Competence_id',
         'Employee_level',
         'Supervisor_level',

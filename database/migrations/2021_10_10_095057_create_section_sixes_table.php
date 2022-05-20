@@ -16,6 +16,7 @@ class CreateSectionSixesTable extends Migration
         Schema::create('section_sixes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->text('employee_comments');
             $table->text('supervisor_comments');
             $table->text('hod_comments')->nullable();

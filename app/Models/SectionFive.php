@@ -11,6 +11,7 @@ class SectionFive extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'proposed_objective',
         'department_linked',
         'objective_measurement',

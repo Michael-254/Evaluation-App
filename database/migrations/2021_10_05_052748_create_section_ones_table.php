@@ -16,6 +16,7 @@ class CreateSectionOnesTable extends Migration
         Schema::create('section_ones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->text('q_oneA');
             $table->text('q_oneB');
             $table->text('q_oneC');

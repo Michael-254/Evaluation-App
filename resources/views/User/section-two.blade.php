@@ -31,7 +31,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if($info->isEmpty())
+                                                @if($info->sectionTwo->count() < 1)
                                                 @foreach($competences as $competence)
                                                 <tr>
                                                     <td class="text-sm">
@@ -65,7 +65,7 @@
                                                 </tr>
                                                 @endforeach
                                                 @else
-                                                @foreach($info as $data)
+                                                @foreach($info->sectionTwo as $data)
                                                 <tr>
                                                     <td class="text-sm">{{$data->comp->competence_skill}}</td>
                                                     <td><input type="text" disabled value="{{$data->Employee_level}}" class="mike average text-sm border-white" /></td>
@@ -85,7 +85,7 @@
                                                     <td>
                                                         <div class="flex justify-center items-center mt-1 space-x-1 text-sm">
                                                             <span id="avg">0</span> /
-                                                            <span>{{$info->count() * 5}}</span>
+                                                            <span>{{$info->sectionTwo->count() * 5}}</span>
                                                         </div>
                                                     </td>
                                                     <td></td>
@@ -106,14 +106,14 @@
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <p class="font-sans text-green-700 mb-2">Supervisor Signature</p>
-                                        <span>{{$personal->supervisor->name}}</span>
+                                        <span>{{$info->supervisor->name}}</span>
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <p class="font-sans text-green-700 mb-2">Supervisor Date</p>
                                         <span>{{now()->format('d-m-Y')}}</span>
                                     </div>
                                 </div>
-                                @if($info->isEmpty())
+                                @if($info->sectionTwo->count() < 1)
                                 <div class="flex justify-end mt-2">
                                     <button type="submit" class="text-white bg-green-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow  mr-1 mb-1 hover:bg-blue-500">Save and Continue</button>
                                 </div>
@@ -121,9 +121,13 @@
                             </form>
 
 
-                            @if(!$info->isEmpty())
+                            @if($info->sectionTwo->count() > 1)
                             <div class="flex justify-end mt-4">
+                                @if($info->evaluation_type == 'yearly')
                                 <a href="{{route('section.three')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
+                                @else
+                                <a href="{{route('section.four')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
+                                @endif
                             </div>
                             @endif
                         </div>

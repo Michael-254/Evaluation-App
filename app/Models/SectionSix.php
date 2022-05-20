@@ -11,6 +11,7 @@ class SectionSix extends Model
 
     protected $fillable = [
         'user_id',
+        'extra_info',
         'employee_comments',
         'supervisor_comments',
         'hod_comments',

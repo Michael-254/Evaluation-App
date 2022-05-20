@@ -73,7 +73,7 @@
                                                 </td>
                                             </form>
                                         </tr>
-                                        @foreach($trainings as $training)
+                                        @foreach($trainings->sectionThree as $training)
                                         @if($training->topic == 'Skill')
                                         <tr>
                                             <td>{{$training->training_required}}</td>
@@ -145,7 +145,7 @@
                                                 </td>
                                             </form>
                                         </tr>
-                                        @foreach($trainings as $training)
+                                        @foreach($trainings->sectionThree as $training)
                                         @if($training->topic == 'Experience')
                                         <tr>
                                             <td>{{$training->training_required}}</td>
@@ -217,7 +217,7 @@
                                                 </td>
                                             </form>
                                         </tr>
-                                        @foreach($trainings as $training)
+                                        @foreach($trainings->sectionThree as $training)
                                         @if($training->topic == 'Knowledge')
                                         <tr>
                                             <td>{{$training->training_required}}</td>
@@ -289,7 +289,7 @@
                                                 </td>
                                             </form>
                                         </tr>
-                                        @foreach($trainings as $training)
+                                        @foreach($trainings->sectionThree as $training)
                                         @if($training->topic == 'Other')
                                         <tr>
                                             <td>{{$training->training_required}}</td>
@@ -303,7 +303,7 @@
                                 </table>
                             </div>
                         </div>
-                        @if($trainings->count() > 3)
+                        @if($trainings->sectionThree->count() > 3)
                         <div class="flex justify-end form-group">
                             <a href="{{route('section.four')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
                         </div>

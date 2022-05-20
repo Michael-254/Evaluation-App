@@ -17,13 +17,11 @@ class SectionSixController extends Controller
 {
     public function create()
     {
-        $progress = SectionFive::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+        $progress = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
 
-        abort_if($progress == '', 403, 'You must complete the previous section');
-
-        $personal = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-        $info = SectionSix::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-        return view('User.section-six', compact('info', 'personal'));
+        abort_if($progress->sectionFive->count() < 2 && $progress->evaluation_type == 'yearly', 403, 'You must complete the previous section');
+        $info = $progress->load('SectionSix');
+        return view('User.section-six', compact('info'));
     }
 
     public function store(Request $request)
@@ -34,9 +32,18 @@ class SectionSixController extends Controller
             "supervisor_comments"  => "required",
         ]);
 
-        auth()->user()->section_six()->create($validated_data);
-        ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first()
-            ->update(['status' => 'completed']);
+        $info = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
+        $validated_data["extra_info"] = $info->id;
+
+        SectionSix::updateOrCreate(
+            ['extra_info' => $info->id],
+            [
+                'user_id' => auth()->id(), 'employee_comments' => $request->employee_comments,
+                'supervisor_comments' => $request->supervisor_comments
+            ]
+        );
+
+        $info->update(['status' => 'completed']);
 
         $data = [
             'intro'  => 'Dear HOD ' . auth()->user()->department . ',',
@@ -56,32 +63,19 @@ class SectionSixController extends Controller
 
     public function final()
     {
-        $info = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-        $data = User::with(
-            'more_info',
-            'section_one',
-            'section_two',
-            'section_three',
-            'section_four',
-            'section_five',
-            'section_six',
-            'sig'
-        )->find(auth()->id());
-        return view('User.final', compact('data', 'info'));
+        $data = ExtraInformation::with('supervisor', 'sectionOne.partB', 'sectionTwo', 'sectionThree', 'sectionFour', 'sectionFive', 'sectionSix')
+            ->where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
+        if ($data != null) {
+            return view('User.final', compact('data'));
+        } else {
+            Toastr::warning('No evalution in progress. Here are the previous ones', 'Warning', ["positionClass" => "toast-bottom-right"]);
+            return redirect()->route('dashboard');
+        }
     }
 
     public function printResults()
     {
-        $data = User::with(
-            'more_info',
-            'section_one',
-            'section_two',
-            'section_three',
-            'section_four',
-            'section_five',
-            'section_six',
-            'sig'
-        )->find(auth()->id())->toArray();
+        $data = $data = ExtraInformation::where('user_id', auth()->id())->latest()->first()->toArray();
         view()->share('data', $data);
 
         $pdf = PDF::loadView('User.document', ['data' => $data]);

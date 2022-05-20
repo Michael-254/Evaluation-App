@@ -12,29 +12,32 @@ use Illuminate\Support\Facades\DB;
 
 class SectionTwoController extends Controller
 {
-    public function create(){
-        $progress = SectionOne::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
+    public function create()
+    {
+        $progress = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
 
-        abort_if($progress == '' ,403,'You must complete the previous section');
-        $personal = ExtraInformation::where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->first();
-        $competences = DB::table('competences')->select('id','competence_skill')->get();     
-        $info = SectionTwo::with('comp')->where('user_id', auth()->id())->whereYear('created_at', '=', now()->year)->get();
-        return view('User.section-two', compact('info','competences','personal'));
+        abort_if($progress->sectionOne->q_oneA == '' && $progress->evaluation_type == 'yearly', 403, 'You must complete the previous section');
+        $competences = DB::table('competences')->select('id', 'competence_skill')->get();
+        $info = $progress->load('SectionTwo');
+        return view('User.section-two', compact('info', 'competences'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-         $request->validate([
+        $request->validate([
             "Competence_id.*"  => "required",
-            "Employee_level.*"  => "required_unless:Competence_id.*,no",           
+            "Employee_level.*"  => "required_unless:Competence_id.*,no",
             "Supervisor_level.*"  => "required_unless:Competence_id.*,no",
             "Comments.*"  => "required_unless:Competence_id.*,no",
         ]);
-        
+
+        $info = ExtraInformation::where('user_id', auth()->id())->where('status', '!=', 'HOD reviewed')->latest()->first();
+
         foreach ($request->Competence_id as $key => $Competence_id) {
-            if($Competence_id != 'no'){
+            if ($Competence_id != 'no') {
                 SectionTwo::create([
-                    'user_id' => auth()->id(), 'Competence_id' => $Competence_id, 'Employee_level' => $request->Employee_level[$key],
+                    'user_id' => auth()->id(), 'extra_info' => $info->id, 'Competence_id' => $Competence_id, 'Employee_level' => $request->Employee_level[$key],
                     'Supervisor_level' => $request->Supervisor_level[$key], 'Comments' => $request->Comments[$key]
                 ]);
             }

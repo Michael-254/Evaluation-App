@@ -58,7 +58,7 @@
                                                 </td>
                                             </form>
                                         </tr>
-                                        @foreach($objectives as $objective)
+                                        @foreach($objectives->sectionFive as $objective)
                                         <tr>
                                             <td>{{$objective->proposed_objective}}</td>
                                             <td>{{$objective->department_linked}}</td>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
 
-                        @if(!$objectives->isEmpty())
+                        @if($objectives->sectionFive->count() > 1)
                         <div class="flex float-right form-group">
                             <a href="{{route('section.six')}}" class="text-green-800 hover:text-blue-600 font-bold px-2">Next <i class="fas fa-arrow-right"></i></a>
                         </div>

@@ -18,18 +18,12 @@
                                         <div class="row">
                                             <div class="col-12">
 
-                                                @if($data->sectionSix->supervisor_comments != '' && Request::segment(1) == 'user')
-                                                <div class="callout callout-info">
-                                                    <h5><i class="fas fa-check-circle fill-current text-green-700"> Congratulations</i></h5>
-                                                    You successfully completed the process and below is a preview of data inputed
-                                                </div>
-                                                @endif
                                                 <!-- Main content -->
                                                 <div class="invoice p-3 mb-3">
 
                                                     <div class="row flex justify-center items-center">
                                                         <img class="w-12 h-12 rounded-full" src="{{asset('assets/dist/img/logo.png')}}" alt="logo image" />
-                                                        <h5 class="mt-1.5 text-green-700 font-bold">Staff Perfomance Evaluation</h5>
+                                                        <h5 class="mt-1.5 text-green-700 font-bold">Past Perfomance Evaluation</h5>
                                                     </div>
 
                                                     <div class="border-double border-4 border-light-blue-500 rounded-md mt-2">

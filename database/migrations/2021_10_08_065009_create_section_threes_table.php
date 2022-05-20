@@ -16,6 +16,7 @@ class CreateSectionThreesTable extends Migration
         Schema::create('section_threes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->string('topic');
             $table->string('training_required');
             $table->string('how_achieved');

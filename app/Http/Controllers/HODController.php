@@ -15,7 +15,7 @@ class HODController extends Controller
 {
     public function IT()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'IT' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'IT' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'IT')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -27,7 +27,7 @@ class HODController extends Controller
 
     public function ME()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'M&E' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'M&E' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data =  User::where('department', '=', 'M&E')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -39,7 +39,7 @@ class HODController extends Controller
 
     public function Communications()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Communications' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Communications' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'Communications')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -51,7 +51,7 @@ class HODController extends Controller
 
     public function Accounts()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Accounts' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Accounts' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'Accounts')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -63,7 +63,7 @@ class HODController extends Controller
 
     public function Operations()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Operations' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Operations' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'Operations')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -75,7 +75,7 @@ class HODController extends Controller
 
     public function HR()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Human Resources' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Human Resources' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'Human Resources')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -88,7 +88,7 @@ class HODController extends Controller
 
     public function Forestry()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Forestry' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Forestry' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'Forestry')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -100,7 +100,7 @@ class HODController extends Controller
 
     public function MITI()
     {
-        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Miti Magazine' || auth()->user()->role_admin, 404, 'Not Found');
+        abort_unless(auth()->user()->role_HOD && auth()->user()->department == 'Miti Magazine' || auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::where('department', '=', 'Miti Magazine')
             ->whereHas('more_info')
             ->with(['more_info' => function ($query) {
@@ -112,7 +112,7 @@ class HODController extends Controller
 
     public function view($id)
     {
-        abort_if(!auth()->user()->role_HOD, 404, 'Not Found');
+        abort_if(!auth()->user()->role_HOD, 403, 'Unauthorized access');
         $data = User::with(
             'more_info',
             'section_one',
@@ -132,7 +132,7 @@ class HODController extends Controller
 
     public function comment(Request $request, $id)
     {
-        abort_if(!auth()->user()->role_HOD, 404, 'Not Found');
+        abort_if(!auth()->user()->role_HOD, 403, 'Unauthorized access');
         $request->validate([
             'hod_comments' => 'required',
         ]);
@@ -181,13 +181,13 @@ class HODController extends Controller
 
     public function followUp()
     {
-        abort_if(!auth()->user()->role_admin, 404, 'Not Found');
+        abort_if(!auth()->user()->role_admin, 403, 'Unauthorized access');
         return view('hod.follow-up');
     }
 
     public function report($id)
     {
-        abort_if(!auth()->user()->role_admin, 404, 'Not Found');
+        abort_if(!auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::with(
             'more_info',
             'section_one',
@@ -203,7 +203,7 @@ class HODController extends Controller
 
     public function filing($id)
     {
-        abort_if(!auth()->user()->role_admin, 404, 'Not Found');
+        abort_if(!auth()->user()->role_admin, 403, 'Unauthorized access');
         $data = User::with(
             'more_info',
             'section_one',

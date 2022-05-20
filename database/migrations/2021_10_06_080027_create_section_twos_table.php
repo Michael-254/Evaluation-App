@@ -16,6 +16,7 @@ class CreateSectionTwosTable extends Migration
         Schema::create('section_twos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->string('Competence_id');
             $table->string('Employee_level');
             $table->string('Supervisor_level');

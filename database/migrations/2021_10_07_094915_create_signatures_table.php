@@ -16,6 +16,7 @@ class CreateSignaturesTable extends Migration
         Schema::create('signatures', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->string('employee')->nullable();
             $table->string('employee_date')->nullable();
             $table->string('supervisor')->nullable();

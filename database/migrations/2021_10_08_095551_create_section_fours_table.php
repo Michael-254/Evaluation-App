@@ -16,6 +16,7 @@ class CreateSectionFoursTable extends Migration
         Schema::create('section_fours', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('extra_info');
             $table->text('sup_works_well');
             $table->text('sup_needs_improvement');
             $table->text('org_works_well');
